@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model usuario {
+  id String @id @default(uuid())
+  nome String
+  senha String
+  empresa empresa[]
+}
+
+model empresa {
+  id Int @id @default(autoincrement())
+  nome String
+  endereco String
+
+
+  usuario usuario @relation(fields: [usuario_id], references: [id])
+  usuario_id String
+
+}
+
+model form_data{
+  id Int @id @default(autoincrement())
+  data DateTime @default(now())
+  tecnico String
+  condicao_tempo String
+
+  dosage_acidulante dosage_acidulante?
+  dosagem_coagulante dosagem_coagulante?
+  dosagem_hipoclorito dosagem_hipoclorito?
+  caixa_recalque caixa_recalque?
+  tanque_equalizacao tanque_equalizacao?
+  reator1 reator1?
+  reator2 reator2?
+  efluente_tratado efluente_tratado?
+  medidor_vazao_ETE medidor_vazao_ETE?
+  hidrometros_descartes hidrometros_descartes?
+  hidrometro_poco hidrometro_poco?
+  cloro cloro?
+  lodo Lodo?
+}
+
+model dosage_acidulante {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  dosagem String
+  ponto_dosagem String
+  estoque Float
+  produto_usado String
+}
+
+model dosagem_coagulante {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  dosagem String
+  ponto_dosagem String
+  estoque Float
+  produto_usado String
+}
+
+model dosagem_hipoclorito {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  dosagem String
+  ponto_dosagem String
+  estoque Float
+}
+
+model caixa_recalque {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  nivel String
+  ph Float
+}
+
+model tanque_equalizacao {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  nivel String
+  ph String
+}
+
+model reator1 {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  solidos Int
+  ph Float
+}
+
+model reator2{
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  solidos Int
+  ph Float
+}
+
+model efluente_tratado {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  ph Float
+  arraste_lodo String
+  vazao_calha_parshall Int
+}
+
+model medidor_vazao_ETE {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  totalizador Int
+  vazao_totalizador Int
+}
+
+model hidrometros_descartes {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  hidrometro_CUC Float
+  hidrometro_pintura Int
+}
+
+model hidrometro_poco {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  hidrometro_poco Int
+  hidrometro_bomba_poco Int
+}
+
+model cloro {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  ponto_analise String
+  valor Float
+  ph_poco Float
+}
+
+model Lodo {
+  form_data form_data @relation(fields: [form_id], references: [id])
+  form_id Int @unique
+  descartando String
+  filtro_prensa String
+  nivel_cacamba Int
+}
