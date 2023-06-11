@@ -46,13 +46,12 @@ export class UserController {
     }
     static async listCompanys(req: Request, res: Response){
         try {
-            const {id} = req.body;
 
-            const resService = await userService.listCompanys(id)
+            const resService = await userService.listCompanys()
 
-            return res
+            return res.status(200).json(resService)
         } catch (error) {
-            
+            return  res.status(502).json(error)
         }
     }
     static async getCompany(req: Request, res: Response){

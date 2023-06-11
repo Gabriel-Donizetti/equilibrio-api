@@ -31,6 +31,17 @@ export default class UserService{
     }
 
     const company = await this.userRepository.createCompany(companyDTO);
+
+    return company
+   }
+
+   async listCompanys(){
+    const companys = await this.userRepository.listCompanys();
+
+    if(!companys){
+        throw new Error ('companys not found')
+    }
+        return companys
    }
 
 }

@@ -49,6 +49,18 @@ class UserRepository{
 
         return company
     }
+
+    async listCompanys(){
+        const companys = await this.prisma.empresa.findMany({
+           take: 1000,
+           select:{
+            endereco: true,
+            nome: true
+           }
+        })
+
+        return companys
+    }
 }
 
 export default UserRepository;
