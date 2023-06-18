@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\controllers",
+    "\\src\\routes",
+    "\\src\\routes\\user"
+  ],
+  "SelectedNode": "\\src\\routes\\user\\userRouter.ts",
+  "PreviewInSolutionExplorer": false
+}

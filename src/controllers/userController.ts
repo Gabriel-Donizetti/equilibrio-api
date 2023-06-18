@@ -26,7 +26,8 @@ export class UserController {
 
     static async createCompany(req: Request, res: Response){
         try {
-            const {nome, endereco, userID} = req.body;
+
+            const { nome, endereco, userID } = req.body;
 
             const company: CompanyDTO = {
                 nome, endereco, userID
