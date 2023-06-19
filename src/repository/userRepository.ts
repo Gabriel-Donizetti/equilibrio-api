@@ -55,7 +55,8 @@ class UserRepository{
            take: 1000,
            select:{
             endereco: true,
-            nome: true
+            nome: true, 
+            id: true
            }
         })
 
